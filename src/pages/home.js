@@ -172,13 +172,13 @@ const faqs = [
 
 const slides = [
   {
-    url: "https://images.shirtly.com/image/upload/v1724873611/KingJetPrinters/Slides/Site-Banner-MAIN_ugosiy.png",
-    alt: "King Jet Printers Canada",
+    url: "https://images.shirtly.com/image/upload/v1727709069/Eurotex/Slides/HEADER_LOGO_iukhjq.webp",
+    alt: "Eurotex North America Inc.",
     href: "/contact",
   },
   {
-    url: "https://images.shirtly.com/image/upload/v1724873609/KingJetPrinters/Slides/Banner-image_Sales_gdmfnv.png",
-    alt: "King Jet Printers DTF Factory Direct",
+    url: "https://images.shirtly.com/image/upload/v1727709069/Eurotex/Slides/HEADER_LOGO_iukhjq.webp",
+    alt: "Eurotex North America Inc.",
     href: "/contact",
   },
 ];
@@ -378,7 +378,7 @@ const Home = () => {
           </section>
 
           {/* Features section */}
-          <section aria-labelledby="cause-heading">
+          {/* <section aria-labelledby="cause-heading">
             <div className="relative bg-black px-6 py-12 sm:px-12 sm:py-20 lg:px-16">
               <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:text-center">
@@ -406,10 +406,10 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* Printing Solutions section */}
-          <section aria-labelledby="cause-heading">
+          {/* <section aria-labelledby="cause-heading">
             <div className="bg-white pb-20 mt-20">
               <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -459,7 +459,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* Service section */}
           {/* <section aria-labelledby="cause-heading">
@@ -492,7 +492,7 @@ const Home = () => {
           </section> */}
 
           {/* About section */}
-          <section aria-labelledby="cause-heading">
+          {/* <section aria-labelledby="cause-heading">
             <div className="pt-24 sm:pt-32">
               <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-2 mb-20">
@@ -559,10 +559,10 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* FAQ section */}
-          <section aria-labelledby="cause-heading ">
+          {/* <section aria-labelledby="cause-heading ">
             <div className="bg-black border-b border-gray-500">
               <div className="mx-auto max-w-7xl px-6 py-20 sm:py-20 lg:px-8 lg:py-20">
                 <div className="mx-auto divide-y divide-white/10">
@@ -601,7 +601,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
         </main>
       </div>
     </>
