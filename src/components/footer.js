@@ -46,8 +46,8 @@ function Footer() {
           <div className="space-y-8">
             <img
               alt="King Jet Printers"
-              src="https://images.shirtly.com/image/upload/v1723833041/KingJetPrinters/Logos/KingJetCanada_WHT_kryr9x.png"
-              className="w-1/2"
+              src="https://images.shirtly.com/image/upload/v1727708999/Eurotex/Logos/EUROTEX_2024_LOGO_ENG_WHITE_grb3r0.png"
+              className="w-full"
             />
             <p className="text-sm leading-6 text-gray-300">
               Since 1945, EuroTex Inc [KingJet Printers Canada] has been a key

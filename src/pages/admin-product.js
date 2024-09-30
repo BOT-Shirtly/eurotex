@@ -27,10 +27,10 @@ function Product() {
   };
   useEffect(() => {
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/product?id=${productId}`,
+        `${process.env.REACT_APP_BASE_URL}/eurotex/product?id=${productId}`,
         {
           headers: {
             authorization: userData?.authToken, // Replace with your actual token
@@ -299,17 +299,13 @@ function Product() {
     setProdData(prodData);
     delete prodData._id;
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     axios
-      .put(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/product`,
-        prodData,
-        {
-          headers: {
-            authorization: userData?.authToken, // Replace with your token
-          },
-        }
-      )
+      .put(`${process.env.REACT_APP_BASE_URL}/eurotex/product`, prodData, {
+        headers: {
+          authorization: userData?.authToken, // Replace with your token
+        },
+      })
       .then((response) => {
         if (response.data.success) {
           toast.success("Information Updated.", {

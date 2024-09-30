@@ -43,7 +43,7 @@ function Header() {
   });
 
   useEffect(() => {
-    var userData = localStorage.getItem("__KingJetUser__");
+    var userData = localStorage.getItem("__EurotexUser__");
     if (userData) {
       setUserDetails(JSON.parse(userData));
     } else {
@@ -51,7 +51,7 @@ function Header() {
     }
     setIsVisible(true);
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/kingjetprinters/products`)
+      .get(`${process.env.REACT_APP_BASE_URL}/eurotex/products`)
       .then((response) => {
         if (response.data.success == undefined) {
           for (var i = 0; i < response.data.categories.length; i++) {
@@ -64,11 +64,11 @@ function Header() {
             categories: response.data.categories,
           });
           //Shopping Cart Data
-          var userData = localStorage.getItem("__KingJetUser__");
+          var userData = localStorage.getItem("__EurotexUser__");
           if (userData) {
             var userToken = JSON.parse(userData);
             axios
-              .get(`${process.env.REACT_APP_BASE_URL}/kingjetprinters/cart`, {
+              .get(`${process.env.REACT_APP_BASE_URL}/eurotex/cart`, {
                 headers: {
                   authorization: userToken?.authToken, // Replace with your actual token
                 },
@@ -79,13 +79,13 @@ function Header() {
                   setCartOrders(response1.data);
                 } else {
                   setIsVisible(false);
-                  localStorage.removeItem("__KingJetUser__");
+                  localStorage.removeItem("__EurotexUser__");
                   window.location.replace("/");
                 }
               })
               .catch((error) => {
                 setIsVisible(false);
-                localStorage.removeItem("__KingJetUser__");
+                localStorage.removeItem("__EurotexUser__");
                 window.location.replace("/");
               });
           } else {
@@ -393,9 +393,9 @@ function Header() {
                     <div className="hidden lg:flex lg:flex-1 lg:items-center">
                       <a href="/">
                         <img
-                          alt=""
-                          src="https://images.shirtly.com/image/upload/v1723469527/KingJetPrinters/Logos/KingJetCanada_xlch7q.png"
-                          className="w-1/3"
+                          alt="Eurotex Inc."
+                          src="https://images.shirtly.com/image/upload/v1727709000/Eurotex/Logos/EUROTEX_2024_LOGO_ENG_BLUE_hpr7gz.png"
+                          className="w-1/2"
                         />
                       </a>
                     </div>

@@ -10,9 +10,9 @@ function AdminUsers() {
   const [people, setPeople] = useState([]);
   useEffect(() => {
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/kingjetprinters/admin/users`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/eurotex/admin/users`, {
         headers: {
           authorization: userData?.authToken, // Replace with your actual token
         },
@@ -54,10 +54,10 @@ function AdminUsers() {
   };
   const updateUsers = (email, active) => {
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     axios
       .put(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/admin/updateUser`,
+        `${process.env.REACT_APP_BASE_URL}/eurotex/admin/updateUser`,
         {
           email,
           active,

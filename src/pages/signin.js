@@ -71,10 +71,7 @@ function Signin() {
         secretKey
       ).toString();
       axios
-        .post(
-          `${process.env.REACT_APP_BASE_URL}/kingjetprinters/signin`,
-          formData
-        )
+        .post(`${process.env.REACT_APP_BASE_URL}/eurotex/signin`, formData)
         .then((response) => {
           if (response.data.success) {
             toast.success("Success !!", {
@@ -89,7 +86,7 @@ function Signin() {
             });
             setIsVisible(false);
             localStorage.setItem(
-              "__KingJetUser__",
+              "__EurotexUser__",
               JSON.stringify(response.data)
             );
             if (response?.data?.role == "Admin") {

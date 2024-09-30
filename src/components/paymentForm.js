@@ -67,10 +67,10 @@ const PaymentForm = (props) => {
       setLoading(false);
       return;
     }
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     // Send payment method ID to the server
     const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/kingjetprinters/createPayment`,
+      `${process.env.REACT_APP_BASE_URL}/eurotex/createPayment`,
       {
         method: "POST",
         headers: {

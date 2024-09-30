@@ -56,10 +56,7 @@ function Signup() {
         secretKey
       ).toString();
       axios
-        .post(
-          `${process.env.REACT_APP_BASE_URL}/kingjetprinters/signup`,
-          formData
-        )
+        .post(`${process.env.REACT_APP_BASE_URL}/eurotex/signup`, formData)
         .then((response) => {
           if (response.data.success) {
             toast.success("Profile created, Please sign-in.", {

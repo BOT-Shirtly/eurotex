@@ -51,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.7"
+    "tailwindcss": "^3.4.7",
+    "ajv": "^7.2.4"
   }
 }

@@ -50,7 +50,7 @@ const Contact = () => {
     setIsVisible(true);
     axios
       .post(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/customerContact`,
+        `${process.env.REACT_APP_BASE_URL}/eurotex/customerContact`,
         formData
       )
       .then((response) => {

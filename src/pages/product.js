@@ -66,9 +66,7 @@ function Product() {
   useEffect(() => {
     setIsVisible(true);
     axios
-      .get(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/product?id=${productId}`
-      )
+      .get(`${process.env.REACT_APP_BASE_URL}/eurotex/product?id=${productId}`)
       .then((response) => {
         if (response.data.success == undefined) {
           setProduct(response?.data[0]);
@@ -103,9 +101,7 @@ function Product() {
 
           // Related Products
           axios
-            .get(
-              `${process.env.REACT_APP_BASE_URL}/kingjetprinters/products/all`
-            )
+            .get(`${process.env.REACT_APP_BASE_URL}/eurotex/products/all`)
             .then((response1) => {
               if (response1.data.success == undefined) {
                 setIsVisible(false);
@@ -164,7 +160,7 @@ function Product() {
         });
         setIsVisible(false);
       });
-    var userData = localStorage.getItem("__KingJetUser__");
+    var userData = localStorage.getItem("__EurotexUser__");
     if (userData) {
       setUserDetails(JSON.parse(userData));
     } else {
@@ -176,9 +172,9 @@ function Product() {
     setIsVisible(true);
     product.orderedVariant = selectedVariants;
     delete product._id;
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/kingjetprinters/cart`, product, {
+      .post(`${process.env.REACT_APP_BASE_URL}/eurotex/cart`, product, {
         headers: {
           authorization: userData?.authToken, // Replace with your token
         },
@@ -211,7 +207,7 @@ function Product() {
             theme: "light",
           });
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         }
       })
@@ -227,7 +223,7 @@ function Product() {
           theme: "light",
         });
         setIsVisible(false);
-        localStorage.removeItem("__KingJetUser__");
+        localStorage.removeItem("__EurotexUser__");
         window.location.replace("/");
       });
   };

@@ -82,14 +82,14 @@ function AdminOrder() {
   const [userDetails, setUserDetails] = useState({});
   const [comment, setComment] = useState("");
   useEffect(() => {
-    var userData = localStorage.getItem("__KingJetUser__");
+    var userData = localStorage.getItem("__EurotexUser__");
     if (userData) {
       setIsVisible(true);
       var userToken = JSON.parse(userData);
       setUserDetails(userToken);
       axios
         .get(
-          `${process.env.REACT_APP_BASE_URL}/kingjetprinters/admin/order?orderNumber=${orderNumber}`,
+          `${process.env.REACT_APP_BASE_URL}/eurotex/admin/order?orderNumber=${orderNumber}`,
           {
             headers: {
               authorization: userToken?.authToken,
@@ -104,17 +104,17 @@ function AdminOrder() {
             setOrderStatus(response.data[0].status);
           } else {
             setIsVisible(false);
-            localStorage.removeItem("__KingJetUser__");
+            localStorage.removeItem("__EurotexUser__");
             window.location.replace("/");
           }
         })
         .catch((error) => {
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         });
     } else {
-      localStorage.removeItem("__KingJetUser__");
+      localStorage.removeItem("__EurotexUser__");
       window.location.replace("/");
     }
   }, []);
@@ -125,13 +125,13 @@ function AdminOrder() {
   }, [orderStatus]);
 
   async function getCustomerReceiptUrl(paymentIntentId) {
-    var userData = localStorage.getItem("__KingJetUser__");
+    var userData = localStorage.getItem("__EurotexUser__");
     if (userData) {
       setIsVisible(true);
       var userToken = JSON.parse(userData);
       axios
         .get(
-          `${process.env.REACT_APP_BASE_URL}/kingjetprinters/getReceiptUrl?paymentIntentId=${paymentIntentId}`,
+          `${process.env.REACT_APP_BASE_URL}/eurotex/getReceiptUrl?paymentIntentId=${paymentIntentId}`,
           {
             headers: {
               authorization: userToken?.authToken,
@@ -144,24 +144,24 @@ function AdminOrder() {
             window.open(response?.data?.receiptUrl, "_blank");
           } else {
             setIsVisible(false);
-            localStorage.removeItem("__KingJetUser__");
+            localStorage.removeItem("__EurotexUser__");
             window.location.replace("/");
           }
         })
         .catch((error) => {
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         });
     } else {
-      localStorage.removeItem("__KingJetUser__");
+      localStorage.removeItem("__EurotexUser__");
       window.location.replace("/");
     }
   }
 
   const updateOrder = () => {
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     var updateData = {
       orderNumber: Number(orderNumber),
       status: orderStatus,
@@ -182,7 +182,7 @@ function AdminOrder() {
     };
     axios
       .put(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/admin/order`,
+        `${process.env.REACT_APP_BASE_URL}/eurotex/admin/order`,
         updateData,
         {
           headers: {
@@ -218,19 +218,19 @@ function AdminOrder() {
           ]);
         } else {
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         }
       })
       .catch((error) => {
         setIsVisible(false);
-        localStorage.removeItem("__KingJetUser__");
+        localStorage.removeItem("__EurotexUser__");
         window.location.replace("/");
       });
   };
   const addComment = () => {
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     var updateData = {
       orderNumber: Number(orderNumber),
       activity: [
@@ -251,7 +251,7 @@ function AdminOrder() {
     };
     axios
       .put(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/admin/order`,
+        `${process.env.REACT_APP_BASE_URL}/eurotex/admin/order`,
         updateData,
         {
           headers: {
@@ -290,20 +290,20 @@ function AdminOrder() {
           ]);
         } else {
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         }
       })
       .catch((error) => {
         setIsVisible(false);
-        localStorage.removeItem("__KingJetUser__");
+        localStorage.removeItem("__EurotexUser__");
         window.location.replace("/");
       });
   };
 
   const generatePDF = () => {
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     var updateData = {
       orderNumber: Number(orderNumber),
       status: orderStatus,
@@ -319,7 +319,7 @@ function AdminOrder() {
     };
     axios
       .put(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/admin/order`,
+        `${process.env.REACT_APP_BASE_URL}/eurotex/admin/order`,
         updateData,
         {
           headers: {
@@ -449,13 +449,13 @@ function AdminOrder() {
           };
         } else {
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         }
       })
       .catch((error) => {
         setIsVisible(false);
-        localStorage.removeItem("__KingJetUser__");
+        localStorage.removeItem("__EurotexUser__");
         window.location.replace("/");
       });
   };

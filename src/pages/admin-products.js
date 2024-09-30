@@ -9,9 +9,9 @@ function AdminProducts() {
   const [people, setPeople] = useState([]);
   useEffect(() => {
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/kingjetprinters/admin/products`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/eurotex/admin/products`, {
         headers: {
           authorization: userData?.authToken, // Replace with your actual token
         },

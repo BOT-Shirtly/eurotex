@@ -53,7 +53,7 @@ function Products() {
   useEffect(() => {
     setIsVisible(true);
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/kingjetprinters/products/all`)
+      .get(`${process.env.REACT_APP_BASE_URL}/eurotex/products/all`)
       .then((response) => {
         if (response.data.success == undefined) {
           setIsVisible(false);

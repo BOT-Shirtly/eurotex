@@ -53,12 +53,12 @@ function Cart() {
   const [orderTotal, setOrderTotal] = useState(0.0);
 
   useEffect(() => {
-    var userData = localStorage.getItem("__KingJetUser__");
+    var userData = localStorage.getItem("__EurotexUser__");
     if (userData) {
       setIsVisible(true);
       var userToken = JSON.parse(userData);
       axios
-        .get(`${process.env.REACT_APP_BASE_URL}/kingjetprinters/cart`, {
+        .get(`${process.env.REACT_APP_BASE_URL}/eurotex/cart`, {
           headers: {
             authorization: userToken?.authToken, // Replace with your actual token
           },
@@ -83,13 +83,13 @@ function Cart() {
             );
           } else {
             setIsVisible(false);
-            localStorage.removeItem("__KingJetUser__");
+            localStorage.removeItem("__EurotexUser__");
             window.location.replace("/");
           }
         })
         .catch((error) => {
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         });
     }
@@ -125,17 +125,13 @@ function Cart() {
 
       setIsVisible(true);
       delete product._id;
-      const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+      const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
       axios
-        .put(
-          `${process.env.REACT_APP_BASE_URL}/kingjetprinters/cart`,
-          product,
-          {
-            headers: {
-              authorization: userData?.authToken, // Replace with your token
-            },
-          }
-        )
+        .put(`${process.env.REACT_APP_BASE_URL}/eurotex/cart`, product, {
+          headers: {
+            authorization: userData?.authToken, // Replace with your token
+          },
+        })
         .then((response) => {
           if (response.data.success) {
             toast.success("Updated.", {
@@ -161,7 +157,7 @@ function Cart() {
               theme: "light",
             });
             setIsVisible(false);
-            localStorage.removeItem("__KingJetUser__");
+            localStorage.removeItem("__EurotexUser__");
             window.location.replace("/");
           }
         })
@@ -177,7 +173,7 @@ function Cart() {
             theme: "light",
           });
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         });
     }
@@ -185,10 +181,10 @@ function Cart() {
 
   const deleteCartItem = (product) => {
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     axios
       .delete(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/cart?combination=${product?.orderedCombination?.name}`,
+        `${process.env.REACT_APP_BASE_URL}/eurotex/cart?combination=${product?.orderedCombination?.name}`,
         {
           headers: {
             authorization: userData?.authToken, // Replace with your token
@@ -223,7 +219,7 @@ function Cart() {
             theme: "light",
           });
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         }
       })
@@ -239,7 +235,7 @@ function Cart() {
           theme: "light",
         });
         setIsVisible(false);
-        localStorage.removeItem("__KingJetUser__");
+        localStorage.removeItem("__EurotexUser__");
         window.location.replace("/");
       });
   };

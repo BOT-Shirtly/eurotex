@@ -230,17 +230,13 @@ function AdminProductNew() {
     prodData.combinations = combination;
     setProdData(prodData);
     setIsVisible(true);
-    const userData = JSON.parse(localStorage.getItem("__KingJetUser__"));
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     axios
-      .post(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/product`,
-        prodData,
-        {
-          headers: {
-            authorization: userData?.authToken, // Replace with your token
-          },
-        }
-      )
+      .post(`${process.env.REACT_APP_BASE_URL}/eurotex/product`, prodData, {
+        headers: {
+          authorization: userData?.authToken, // Replace with your token
+        },
+      })
       .then((response) => {
         if (response.data.success) {
           toast.success("Product Added.", {

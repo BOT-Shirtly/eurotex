@@ -28,14 +28,14 @@ const Profile = ({ showModal, closeModal }) => {
     });
   };
   useEffect(() => {
-    const userData = localStorage.getItem("__KingJetUser__");
+    const userData = localStorage.getItem("__EurotexUser__");
     if (userData) {
       setFormData(JSON.parse(userData));
     }
   }, []);
 
   const signOut = () => {
-    localStorage.removeItem("__KingJetUser__");
+    localStorage.removeItem("__EurotexUser__");
     window.location.replace("/");
   };
   const updateData = () => {
@@ -54,15 +54,11 @@ const Profile = ({ showModal, closeModal }) => {
       password: formData?.password,
     };
     axios
-      .put(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/updateUser`,
-        updateData,
-        {
-          headers: {
-            authorization: formData?.authToken, // Replace with your token
-          },
-        }
-      )
+      .put(`${process.env.REACT_APP_BASE_URL}/eurotex/updateUser`, updateData, {
+        headers: {
+          authorization: formData?.authToken, // Replace with your token
+        },
+      })
       .then((response) => {
         if (response.data.success) {
           toast.success("Information Updated.", {
@@ -81,7 +77,7 @@ const Profile = ({ showModal, closeModal }) => {
             password: "",
           });
           delete formData?.password;
-          localStorage.setItem("__KingJetUser__", JSON.stringify(formData));
+          localStorage.setItem("__EurotexUser__", JSON.stringify(formData));
         } else {
           toast.error(response.data.message, {
             position: "bottom-center",
@@ -94,7 +90,7 @@ const Profile = ({ showModal, closeModal }) => {
             theme: "light",
           });
           setIsVisible(false);
-          localStorage.removeItem("__KingJetUser__");
+          localStorage.removeItem("__EurotexUser__");
           window.location.replace("/");
         }
       })
@@ -110,7 +106,7 @@ const Profile = ({ showModal, closeModal }) => {
           theme: "light",
         });
         setIsVisible(false);
-        localStorage.removeItem("__KingJetUser__");
+        localStorage.removeItem("__EurotexUser__");
         window.location.replace("/");
       });
   };

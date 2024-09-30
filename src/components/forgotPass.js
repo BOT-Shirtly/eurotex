@@ -31,7 +31,7 @@ const ForgotPass = ({ showModal, closeModal }) => {
     setIsVisible(true);
     axios
       .post(
-        `${process.env.REACT_APP_BASE_URL}/kingjetprinters/forgotPassword`,
+        `${process.env.REACT_APP_BASE_URL}/eurotex/forgotPassword`,
         formData
       )
       .then((response) => {
