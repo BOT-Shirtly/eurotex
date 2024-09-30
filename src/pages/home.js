@@ -273,7 +273,7 @@ const Home = () => {
                         <img
                           src={slides[currentIndex].url}
                           alt={slides[currentIndex].alt}
-                          className="h-full w-full object-cover object-center"
+                          className="h-[50vh] w-full object-contain object-center"
                         />
                       </a>
                     </div>
