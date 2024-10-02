@@ -15,6 +15,10 @@ import Footer from "./components/footer";
 import Orders from "./pages/orders";
 import Admin from "./pages/admin";
 import PrivacyPolicy from "./pages/privacy-policy";
+import Service from "pages/service";
+import Terms from "pages/terms";
+import ReturnRfund from "pages/return-refund";
+import Shipping from "pages/shipping";
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/service" element={<Service />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/return-refund" element={<ReturnRfund />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/products" element={<Products />} />

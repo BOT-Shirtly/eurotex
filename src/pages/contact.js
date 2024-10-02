@@ -4,32 +4,6 @@ import { ToastContainer, toast } from "react-toastify";
 import Loading from "components/loading";
 import axios from "axios";
 
-const incentives = [
-  {
-    name: "Product Catalog",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce/icons/icon-returns-light.svg",
-    description:
-      "It's not actually free we just price it into the products. Someone's paying for it, and it's not us.",
-    href: "https://kingjetprinter.com/wp-content/uploads/2024/06/Powderless-DTF-Printer.pdf",
-  },
-  {
-    name: "Tech-Support",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg",
-    description:
-      "If it breaks in the first 10 years we'll replace it. After that you're on your own though.",
-    href: "#",
-  },
-  {
-    name: "Printing Video",
-    imageSrc: "https://tailwindui.com/img/ecommerce/icons/icon-chat-light.svg",
-    description:
-      "If you don't like it, trade it to one of your friends for something of theirs. Don't send it here though.",
-    href: "#",
-  },
-];
-
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -189,9 +163,9 @@ const Contact = () => {
               <p className="mt-2 text-lg leading-8 text-gray-600">
                 Have a Question or Inquiry? We're Here to Help.
                 <br />
-                Provide us with your details in the form, and a KingJet Printers
-                Canada representative will get back to you within 24-48 hours.
-                Ready to take your business to the next level?
+                Provide us with your details in the form, and a Eurotex Canada
+                representative will get back to you within 24-48 hours. Ready to
+                take your business to the next level?
               </p>
               <div className="mt-16 flex flex-col gap-16 sm:gap-y-20 lg:flex-row">
                 <div className="lg:flex-auto">
@@ -310,8 +284,8 @@ const Contact = () => {
                 </div>
                 <div className="lg:mt-0 lg:w-80 lg:flex-none">
                   <img
-                    alt="KingJetPrinters Canada Logo"
-                    src="https://images.shirtly.com/image/upload/v1723469527/KingJetPrinters/Logos/KingJetCanada_xlch7q.png"
+                    alt="Eurotex Logo"
+                    src="https://images.shirtly.com/image/upload/v1727709000/Eurotex/Logos/EUROTEX_2024_LOGO_ENG_BLUE_hpr7gz.png"
                     className="w-full"
                   />
                   <figure className="mt-10">
@@ -326,9 +300,9 @@ const Contact = () => {
                         our products but also in our customer service. We
                         provide comprehensive Canadian technical support,
                         offering both on-site and online assistance, as well as
-                        personalized one-on-one technical support. At KingJet
-                        Printers Canada, we are more than just a supplier—we are
-                        a partner dedicated to helping you grow your business.
+                        personalized one-on-one technical support. At Eurotex
+                        Canada, we are more than just a supplier—we are a
+                        partner dedicated to helping you grow your business.
                       </p>
                     </blockquote>
                     {/* <figcaption className="mt-10 flex gap-x-6">

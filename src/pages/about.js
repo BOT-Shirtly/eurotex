@@ -2,25 +2,27 @@ import React from "react";
 
 const incentives = [
   {
-    name: "Unwavering Quality",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce/icons/icon-exchange-simple.svg",
+    name: "BigOvenTees",
+    imageSrc: "https://bigoventees.netlify.app/static/media/logo.f7aedac0.png",
+    link: "https://bigoventees.com/",
     description:
-      "With 18 years of expertise in printer design and R&D, KingJet is committed to excellence through advanced production technologies and rigorous quality control processes. Our printers integrate cutting-edge industry innovations, offering unparalleled stability, exceptional durability, and an extended service life.",
+      "BOT NETWORK is a Platform solution for professional decorators. Say goodbye to dealing with customers directly. Now BOT Network generates an additional sales & profit stream and you just focus on decorating quality garments. The BOT network is an easy-to-use platform that grants you access to your network of customers.",
   },
   {
-    name: "Service & Support",
+    name: "Twiga",
+    link: "https://twigacanada.com/",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce/icons/icon-shipping-simple.svg",
+      "https://twigacanada.com/cdn/shop/files/Twiga-Logos_3c808a17-ee36-4463-bb22-2f3072417ac1_246x150.png?v=1699390518",
     description:
-      "KingJet strives to provide prompt responses to customer needs, addressing inquiries and requests in a timely manner. Our technical support team, with its deep industry knowledge and experience, is dedicated to providing precise guidance and effective solutions.",
+      "The amazing TWIGA history and stellar reputation for “white glove” service goes back more than 38 years ago. For 16 years (1986-2002), our current V.P. Director Technical Services, Alnoor Remtullah, was a Service Manager and Technical VP for Sew Canada Industries, a well-known Tajima distributor in Ontario, Canada. To this day, Alnoor has been involved in assisting the Tajima technical department in many challenges. He has also made valuable suggestions that have been implemented on Tajima machines and the TWIGA service team continues to support Tajima customers.",
   },
   {
-    name: "Consumables and Supplies",
+    name: "SerTec",
+    link: "https://dpidgprinting.com/",
     imageSrc:
-      "https://tailwindui.com/img/ecommerce/icons/icon-warranty-simple.svg",
+      "https://dpidgprinting.com/sites/default/files/evnetwork_it_sertec_logo.jpg",
     description:
-      "Backed by a robust and dependable supply chain, we deliver high-quality printing consumables at highly competitive prices, offering our customers exceptional value and seamless production.",
+      "Leading company in the construction of printing systems on all surfaces",
   },
 ];
 
@@ -29,57 +31,62 @@ const About = () => {
     <div className="bg-gray-50">
       <div className="mx-auto max-w-7xl py-20 sm:px-2 sm:py-30 lg:px-4">
         <div className="mx-auto max-w-2xl px-4 lg:max-w-none">
-          <div className="grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-2 mb-20">
+          <div>
             <div>
               <h2 className="text-4xl font-bold tracking-tight text-gray-900">
-                About KingJet Printers
+                EUROTEX NORTH AMERICA INC.
               </h2>
               <p className="mt-4 text-gray-500">
-                KingJet Printers Canada is a proud member of a distinguished
-                family of companies that has been pioneering in textiles and
-                manufacturing since 1945. Our sister company, KingJet
-                (Guangzhou) Digital Technology Co., Ltd., boasts 18 years of
-                continuous innovation in digital printing technology and is
-                recognized globally with the esteemed “KINGJET金捷®” brand.
+                Eurotex offers a wide range of products to enhance the
+                visibility and versatility of various applications. Whether you
+                are looking to add a touch of creativity to uniforms, jackets,
+                vests, sportswear, footwear, or accessories, Eurotex has the
+                solutions for you.
                 <br />
                 <br />
-                Specializing in the sale of DTF (Direct-to-Film) inks, printing
-                supplies, and equipment, we cater to both businesses offering
-                DTF printing services and individuals across Canada. As the
-                first to pioneer R&D in DTF printing, KingJet remains at the
-                forefront of industry trends, dedicating our efforts to the
-                production and distribution of high-quality DTF printers, films,
-                inks, and related supplies.
+                One of the key areas of expertise at Eurotex lies in trims,
+                reflective materials, and transfers. These products are designed
+                to elevate the aesthetics and functionality of your garments and
+                accessories. The extensive selection of trims ensures that you
+                can find the perfect embellishments to complement your designs
+                and make them stand out. Reflective materials are particularly
+                valuable when it comes to safety and visibility. Eurotex offers
+                reflective materials that can be integrated into your products,
+                enhancing their visibility in low-light conditions. This is
+                especially important for applications such as workwear, outdoor
+                gear, or any situation where visibility is crucial.
                 <br />
                 <br />
-                Our commitment to excellence is reflected not only in our
-                products but also in our customer service. We provide
-                comprehensive Canadian technical support, offering both on-site
-                and online assistance, as well as personalized one-on-one
-                technical support. At KingJet Printers Canada, we are more than
-                just a supplier—we are a partner dedicated to helping you grow
-                your business.
+                Transfers are another specialty of Eurotex. These allow you to
+                add intricate designs, logos, or branding elements to your
+                textiles with ease. Whether you're looking for a simple transfer
+                or a more complex and detailed design, Eurotex can provide you
+                with high-quality transfer options.
+                <br />
+                <br />
+                Throughout the years, Eurotex has built a knowledgeable team
+                dedicated to assisting customers. Their expertise and commitment
+                to customer satisfaction ensure that you will receive the
+                support you need when exploring the possibilities offered by
+                Eurotex's products. Let your creativity shine through while
+                benefiting from the quality and versatility.
               </p>
             </div>
-            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-gray-100">
-              {/* <img
-                    alt=""
-                    src="https://tailwindui.com/img/ecommerce-images/incentives-07-hero.jpg"
-                    className="object-cover"
-                /> */}
+            {/* <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-gray-100">
+              
               <iframe
                 src="https://www.youtube.com/embed/l6JbWm5DEMQ"
                 title="About KingJet Factory"
               ></iframe>
-            </div>
+            </div> */}
           </div>
           <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3 mb-20">
             {incentives.map((incentive) => (
               <div key={incentive.name} className="sm:flex lg:block">
                 <div className="sm:flex-shrink-0">
-                  <img alt="" src={incentive.imageSrc} className="h-16 w-16" />
+                  <img alt="" src={incentive.imageSrc} className="h-16" />
                 </div>
-                <div className="mt-4 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-6">
+                <div className="mt-4 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-6 h-[20vh]">
                   <h3 className="text-sm font-medium text-gray-900">
                     {incentive.name}
                   </h3>
@@ -87,71 +94,35 @@ const About = () => {
                     {incentive.description}
                   </p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.open(incentive?.link, "_blank");
+                  }}
+                  className="mt-5 w-full rounded-md bg-themeColor-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-themeColor-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-themeColor-500"
+                >
+                  Visit Site
+                </button>
               </div>
             ))}
           </div>
           <div className="grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-1 mb-20">
+            <h2 className="text-4xl font-bold tracking-tight text-gray-900 text-center">
+              HISTORY
+            </h2>
             <div className="overflow-hidden rounded-lg bg-gray-100 mx-auto">
-              {/* <img
-                        src="https://kingjetprinter.com/wp-content/uploads/2023/12/13_%E5%88%86%E9%94%80%E7%BD%91%E7%BB%9C_Distribution-network_1200x460.png"
-                    /> 
-                    <img
-                        src="https://kingjetprinter.com/wp-content/uploads/2023/12/14_%E7%89%B9%E8%89%B2%E6%9C%8D%E5%8A%A1_Services_1200x630.png"
-                    />  */}
-              <img src="https://kingjetprinter.com/wp-content/uploads/2023/12/15_%E5%90%88%E4%BD%9C%E4%BC%99%E4%BC%B4_Partners-reviews_1200x355.png" />
+              <img src="https://images.shirtly.com/image/upload/v1727880502/Eurotex/Slides/timeline_yzvnbo.jpg" />
+            </div>
+            <div className="text-center">
+              <a
+                type="button"
+                href="/contact"
+                className="rounded-md bg-themeColor-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-themeColor-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-themeColor-500"
+              >
+                CONTACT US
+              </a>
             </div>
           </div>
-          {/* <div className="mx-auto max-w-xl lg:max-w-none mb-20">
-            <div className="text-center">
-              <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-                BLAZING A PATH TOWARD A BETTER, SMARTER FUTURE
-              </h2>
-            </div>
-            <div className="mx-auto mt-12 grid max-w-sm grid-cols-1 gap-x-8 gap-y-10 sm:max-w-none lg:grid-cols-3">
-              {incentives2.map((incentive) => (
-                <div
-                  key={incentive.name}
-                  className="text-center sm:flex sm:text-left lg:block lg:text-center"
-                >
-                  <div className="sm:flex-shrink-0">
-                    <div className="flow-root">
-                      <img
-                        alt=""
-                        src={incentive.imageSrc}
-                        className="mx-auto h-35 w-35"
-                      />
-                    </div>
-                  </div>
-                  <div className="mt-3 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-6">
-                    <h3 className="text-sm font-medium text-gray-900">
-                      {incentive.name}
-                    </h3>
-                    <p className="mt-2 text-sm text-gray-500">
-                      {incentive.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div> */}
-          {/* <div className="mx-auto max-w-xl lg:max-w-none">
-            <div className="text-center mb-5">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-                KingJet Is On The Way
-              </h1>
-              <p className="mt-4 text-gray-500 w-3/4 mx-auto">
-                About 20 exhibitions & visits to clients around the world
-                throughout the year. It’s just one of the many ways that KingJet
-                serves the printer industry as an innovator. As a trusted
-                partner, we KingJet aim to provide you, our customers become an
-                established leader in the inkjet printing industry.
-              </p>
-            </div>
-            <div className="overflow-hidden rounded-lg bg-gray-100">
-              <img src="https://kingjetprinter.com/wp-content/uploads/2023/12/%E5%B1%95%E4%BC%9A-%E7%AD%89%E9%AB%98_01.jpg" />
-              <img src="https://kingjetprinter.com/wp-content/uploads/2023/12/%E5%B1%95%E4%BC%9A-%E7%AD%89%E9%AB%98_02.jpg" />
-            </div>
-          </div> */}
         </div>
       </div>
     </div>

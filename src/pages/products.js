@@ -108,9 +108,9 @@ function Products() {
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               All Products
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-base text-gray-500">
+            {/* <p className="mx-auto mt-4 max-w-xl text-base text-gray-500">
               {pageHeader}
-            </p>
+            </p> */}
           </div>
 
           {/* Filters */}
