@@ -1,5 +1,5 @@
 "use client";
-
+import { useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
@@ -43,6 +43,9 @@ function classNames(...classes) {
 }
 
 function Products() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const param1 = queryParams.get("cat");
   const [isVisible, setIsVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const [pageHeader, setPageHeader] = useState(
@@ -51,9 +54,15 @@ function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    console.log(param1);
+    if (param1 != "" && param1 != undefined) {
+      var url = `${process.env.REACT_APP_BASE_URL}/eurotex/products?cat=${param1}`;
+    } else {
+      var url = `${process.env.REACT_APP_BASE_URL}/eurotex/products/all`;
+    }
     setIsVisible(true);
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/eurotex/products/all`)
+      .get(url)
       .then((response) => {
         if (response.data.success == undefined) {
           setIsVisible(false);
@@ -108,9 +117,9 @@ function Products() {
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               All Products
             </h1>
-            {/* <p className="mx-auto mt-4 max-w-xl text-base text-gray-500">
-              {pageHeader}
-            </p> */}
+            <p className="mx-auto mt-4 max-w-xl text-base text-gray-500">
+              {param1?.split(",")?.join(", ")}
+            </p>
           </div>
 
           {/* Filters */}
@@ -246,36 +255,46 @@ function Products() {
             <h2 id="products-heading" className="sr-only">
               Products
             </h2>
-
-            <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-              {products?.map((product) => (
-                <div
-                  key={product.id}
-                  className="group relative border-b border-r border-gray-200 p-4 sm:p-6"
-                >
-                  <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-0 group-hover:opacity-75">
-                    <img
-                      alt={product.imageAlt}
-                      src={product.imageSrc}
-                      className="h-full w-full object-contain object-center"
-                    />
+            {products?.length > 0 ? (
+              <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
+                {products?.map((product) => (
+                  <div
+                    key={product.id}
+                    className="group relative border-b border-r border-gray-200 p-4 sm:p-6"
+                  >
+                    <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-0 group-hover:opacity-75">
+                      <img
+                        alt={product.imageAlt}
+                        src={product.imageSrc}
+                        className="h-full w-full object-contain object-center"
+                      />
+                    </div>
+                    <div className="pb-4 pt-10 text-center">
+                      <h3 className="text-sm font-medium text-gray-900">
+                        <a href={product.href}>
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0"
+                          />
+                          {product.name}
+                        </a>
+                      </h3>
+                      <p className="mt-4 text-base font-medium text-gray-900">
+                        {isNaN(product?.price)
+                          ? product?.price
+                          : `$${product?.price}`}
+                      </p>
+                    </div>
                   </div>
-                  <div className="pb-4 pt-10 text-center">
-                    <h3 className="text-sm font-medium text-gray-900">
-                      <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.name}
-                      </a>
-                    </h3>
-                    <p className="mt-4 text-base font-medium text-gray-900">
-                      {isNaN(product?.price)
-                        ? product?.price
-                        : `$${product?.price}`}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center h-full p-32">
+                <h1 className="text-5xl text-gray-500 font-bold animate-pulse">
+                  Coming Soon
+                </h1>
+              </div>
+            )}
           </section>
 
           {/* Pagination */}

@@ -38,56 +38,56 @@ const equipment = [
   {
     name: "DTF Printers & Dryers",
     description: "DTF Printers & Dryers",
-    href: "/products",
+    href: "/products?cat=DTF Printer,DTF Dryer",
     icon: ChartPieIcon,
   },
   {
     name: "UV Printers",
     description: "UV Printers",
-    href: "/products",
+    href: "/products?cat=UV Printer",
     icon: CursorArrowRaysIcon,
   },
   {
     name: "Embroidery Machines",
     description: "Embroidery Machines",
-    href: "/products",
+    href: "/products?cat=Embroidery Machine",
     icon: ArrowPathIcon,
   },
   {
     name: "Heat Presses",
     description: "Heat Presses",
-    href: "/products",
+    href: "/products?cat=Heat Press",
     icon: FingerPrintIcon,
   },
 ];
 const supplies = [
   {
     name: "DTF",
-    description: "Direct Heat Transfer",
-    href: "/products",
+    description: "DTF Ink, DTF Film, DTF Adhesive, DTF Cleaner",
+    href: "/products?cat=DTF Ink,DTF Film,DTF Adhesive,DTF Cleaner",
     icon: ChartPieIcon,
   },
   {
     name: "UV DTF",
-    description: "Ultra-Violetr Direct Heat Transfer",
-    href: "/products",
+    description: "UV Ink, Ab Film, UV Cleaner",
+    href: "/products?cat=UV Ink,Ab Film,UV Cleaner",
     icon: SquaresPlusIcon,
   },
   {
     name: "Embroidery",
-    description: "Embroidery Supplies",
-    href: "/products",
+    description: "Threads, Bobbins, Backing, Spray, Puff Backer",
+    href: "/products?cat=Threads,Bobbins,Backing,Spray,Puff Backer",
     icon: ArrowPathIcon,
   },
   {
     name: "Reflective Trims",
-    description: "Reflective Trims",
-    href: "/products",
+    description: "Trims",
+    href: "/products?cat=Trims",
     icon: CursorArrowRaysIcon,
   },
   {
     name: "Heat Presses",
-    description: "Your customers’ data will be safe and secure",
+    description: "Teflon Sheets",
     href: "/products",
     icon: PlayCircleIcon,
   },
@@ -117,75 +117,74 @@ function Header() {
       setUserDetails({});
     }
     setIsVisible(true);
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/eurotex/products`)
-      .then((response) => {
-        if (response.data.success == undefined) {
-          for (var i = 0; i < response.data.categories.length; i++) {
-            if (response.data.categories[i].featured.length > 4) {
-              response.data.categories[i].featured.splice(4);
-            }
-          }
-          console.log(response.data);
-          setNavigation({
-            ...navigation,
-            categories: response.data.categories,
-          });
-          //Shopping Cart Data
-          var userData = localStorage.getItem("__EurotexUser__");
-          if (userData) {
-            var userToken = JSON.parse(userData);
-            axios
-              .get(`${process.env.REACT_APP_BASE_URL}/eurotex/cart`, {
-                headers: {
-                  authorization: userToken?.authToken, // Replace with your actual token
-                },
-              })
-              .then((response1) => {
-                if (response1.data.success == undefined) {
-                  setIsVisible(false);
-                  setCartOrders(response1.data);
-                } else {
-                  setIsVisible(false);
-                  localStorage.removeItem("__EurotexUser__");
-                  window.location.replace("/");
-                }
-              })
-              .catch((error) => {
-                setIsVisible(false);
-                localStorage.removeItem("__EurotexUser__");
-                window.location.replace("/");
-              });
+    //Shopping Cart Data
+    var userData = localStorage.getItem("__EurotexUser__");
+    if (userData) {
+      var userToken = JSON.parse(userData);
+      axios
+        .get(`${process.env.REACT_APP_BASE_URL}/eurotex/cart`, {
+          headers: {
+            authorization: userToken?.authToken, // Replace with your actual token
+          },
+        })
+        .then((response1) => {
+          if (response1.data.success == undefined) {
+            setIsVisible(false);
+            setCartOrders(response1.data);
           } else {
             setIsVisible(false);
+            localStorage.removeItem("__EurotexUser__");
+            window.location.replace("/");
           }
-        } else {
-          toast.error(response.data.message, {
-            position: "bottom-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+        })
+        .catch((error) => {
           setIsVisible(false);
-        }
-      })
-      .catch((error) => {
-        toast.error("Error, please try again later!!", {
-          position: "bottom-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
+          localStorage.removeItem("__EurotexUser__");
+          window.location.replace("/");
         });
-        setIsVisible(false);
-      });
+    } else {
+      setIsVisible(false);
+    }
+    // axios
+    //   .get(`${process.env.REACT_APP_BASE_URL}/eurotex/products`)
+    //   .then((response) => {
+    //     if (response.data.success == undefined) {
+    //       for (var i = 0; i < response.data.categories.length; i++) {
+    //         if (response.data.categories[i].featured.length > 4) {
+    //           response.data.categories[i].featured.splice(4);
+    //         }
+    //       }
+    //       setNavigation({
+    //         ...navigation,
+    //         categories: response.data.categories,
+    //       });
+    //     } else {
+    //       toast.error(response.data.message, {
+    //         position: "bottom-center",
+    //         autoClose: 3000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "light",
+    //       });
+    //       setIsVisible(false);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     toast.error("Error, please try again later!!", {
+    //       position: "bottom-center",
+    //       autoClose: 3000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //       draggable: true,
+    //       progress: undefined,
+    //       theme: "light",
+    //     });
+    //     setIsVisible(false);
+    //   });
   }, []);
 
   const openModal = () => {

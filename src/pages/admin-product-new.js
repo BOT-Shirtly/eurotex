@@ -18,12 +18,36 @@ function AdminProductNew() {
   const [variants, setVariants] = useState([]);
   const [details, setDetails] = useState([]);
   const [combination, setCombination] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [enabled, setEnabled] = useState(false);
   const [combinations, setCombinations] = useState([]);
   const [editorValue, setEditorValue] = useState("");
+  const [tagValue, setTagValue] = useState("");
+  const [tagsArray, setTagsArray] = useState([]);
   const stringToBoolean = (str) => {
     return str.toLowerCase() === "true";
   };
+  useEffect(() => {
+    setIsVisible(true);
+    const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/eurotex/categories`, {
+        headers: {
+          authorization: userData?.authToken, // Replace with your actual token
+        },
+      })
+      .then(async (response) => {
+        if (response.data.success == undefined) {
+          setCategories(response.data);
+          setIsVisible(false);
+        } else {
+          setIsVisible(false);
+        }
+      })
+      .catch((error) => {
+        setIsVisible(false);
+      });
+  }, []);
   useEffect(() => {
     function combineVariants(variants) {
       const combine = (index, currentCombination) => {
@@ -228,6 +252,7 @@ function AdminProductNew() {
     prodData.description = editorValue;
     prodData.active = enabled;
     prodData.combinations = combination;
+    prodData.tagsArray = tagsArray;
     setProdData(prodData);
     setIsVisible(true);
     const userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
@@ -443,10 +468,67 @@ function AdminProductNew() {
                 value={prodData?.category}
                 className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-themeColor-600 sm:text-sm sm:leading-6"
               >
-                <option value={"DTF Printer"}>DTF Printer</option>
-                <option value={"UV Printer"}>UV Printer</option>
-                <option value={"Supplies"}>Supplies</option>
+                {categories?.map((cat, i) => (
+                  <option ley={i} value={cat?.name}>
+                    {cat?.name}
+                  </option>
+                ))}
               </select>
+            </div>
+            <div className="sm:col-span-3 mt-5">
+              <label
+                htmlFor="location"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Tags
+              </label>
+              <div className="mt-2 flex item-center">
+                <input
+                  id="tag"
+                  name="tag"
+                  type="text"
+                  value={tagValue}
+                  onChange={(e) => setTagValue(e.target.value)}
+                  placeholder="Add Tag"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-themeColor-600 sm:text-sm sm:leading-6"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (tagValue != "") {
+                      if (tagsArray.indexOf(tagValue) < 0) {
+                        tagsArray.push(tagValue);
+                        setTagsArray(tagsArray);
+                        setTagValue("");
+                      }
+                    }
+                  }}
+                  className="block w-24 ml-5 rounded-md bg-themeColor-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-themeColor-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-themeColor-600"
+                >
+                  Add Tag
+                </button>
+              </div>
+              <div className="mt-5">
+                {tagsArray?.length > 0
+                  ? tagsArray?.map((tag, i) => {
+                      return (
+                        <span
+                          key={i}
+                          className="ml-2 inline-flex items-center gap-x-1.5 rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-700"
+                        >
+                          <svg
+                            viewBox="0 0 6 6"
+                            aria-hidden="true"
+                            className="h-1.5 w-1.5 fill-red-500"
+                          >
+                            <circle r={3} cx={3} cy={3} />
+                          </svg>
+                          {tag}
+                        </span>
+                      );
+                    })
+                  : null}
+              </div>
             </div>
 
             {/* Features */}

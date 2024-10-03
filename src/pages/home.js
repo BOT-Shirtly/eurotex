@@ -214,6 +214,10 @@ const Home = () => {
       .then((response) => {
         if (response.data.success == undefined) {
           setIsVisible(false);
+
+          if (response.data.length > 4) {
+            response.data.splice(4);
+          }
           setFavorites(response.data);
         } else {
           toast.error(response.data.message, {
@@ -343,9 +347,9 @@ const Home = () => {
               </div>
 
               <div className="-mx-px grid grid-cols-2 border-l border-gray-200 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-                {favorites?.map((favorite) => (
+                {favorites?.map((favorite, i) => (
                   <div
-                    key={favorite.id}
+                    key={i}
                     className="group relative border-t border-b border-r border-gray-200"
                   >
                     <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg group-hover:opacity-75">
