@@ -5,7 +5,6 @@ import { LockClosedIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
 
 const PaymentForm = (props) => {
-  console.log(props?.metadata);
   const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();

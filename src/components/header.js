@@ -64,7 +64,7 @@ const supplies = [
   {
     name: "DTF",
     description: "DTF Ink, DTF Film, DTF Adhesive, DTF Cleaner",
-    href: "/products?cat=DTF Ink,DTF Film,DTF Adhesive,DTF Cleaner",
+    href: "/products?cat=DTF Ink,DTF Film,DTF Adhesive,DTF Cleaner,DTF Powder",
     icon: ChartPieIcon,
   },
   {
@@ -88,7 +88,7 @@ const supplies = [
   {
     name: "Heat Presses",
     description: "Teflon Sheets",
-    href: "/products",
+    href: "/products?cat=Teflon Sheets",
     icon: PlayCircleIcon,
   },
 ];

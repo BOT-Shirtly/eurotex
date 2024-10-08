@@ -55,15 +55,8 @@ function Checkout() {
     },
     {
       id: 2,
-      title: "UPS Express",
-      turnaround: "3–7 business days",
-      price: 0,
-    },
-    {
-      id: 3,
       title: "Store Pick-up",
       turnaround: "2–5 business days",
-      price: 0,
     },
   ]);
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
@@ -123,6 +116,7 @@ function Checkout() {
       setShippingAddress(billingAddress);
     }
   }, [billingAddress]);
+
   useEffect(() => {
     if (selectedDeliveryMethod?.title == "Store Pick-up") {
       setShippingCost(0.0);
@@ -296,7 +290,11 @@ function Checkout() {
     var userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/eurotex/getRates?postalCode=${shippingAddress.postal}&weightPounds=${totalWeight}`,
+        `${process.env.REACT_APP_BASE_URL}/eurotex/getRates?shipToState=${
+          shippingAddress?.state?.split("-")[0]
+        }&shipToCountry=${shippingAddress.country}&postalCode=${
+          shippingAddress.postal
+        }&weightPounds=${Number(totalWeight).toString()}`,
         {
           headers: {
             authorization: userData?.authToken, // Replace with your actual token
@@ -306,6 +304,8 @@ function Checkout() {
       .then((response) => {
         if (response.data.success == undefined) {
           setLoading(false);
+
+          console.log(response.data);
 
           const updatedOptions = [...deliveryMethods];
           for (var i = 0; i < response?.data?.length; i++) {
@@ -438,7 +438,7 @@ function Checkout() {
                           Shipping
                         </h3>
                         <div className="mt-2 text-sm text-yellow-700">
-                          <p>Please enter correct postal code.</p>
+                          <p>Please enter correct postal code or provience.</p>
                         </div>
                       </div>
                     </div>
@@ -654,7 +654,7 @@ function Checkout() {
                         Shipping
                       </h3>
                       <div className="mt-2 text-sm text-yellow-700">
-                        <p>Please enter correct postal code.</p>
+                        <p>Please enter correct postal code or provience.</p>
                       </div>
                     </div>
                   </div>
@@ -843,6 +843,11 @@ function Checkout() {
                     name="state"
                     value={billingAddress.state}
                     onChange={handleBillingInputChange}
+                    onBlur={() => {
+                      if (sameBillingShipping) {
+                        getShippingRate();
+                      }
+                    }}
                     className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-themeColor-600 sm:text-sm sm:leading-6"
                   >
                     {provinces.map((province, index) => (
@@ -1021,6 +1026,7 @@ function Checkout() {
                         id="state"
                         name="state"
                         value={shippingAddress.state}
+                        onBlur={getShippingRate}
                         onChange={handleShippingInputChange}
                         className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-themeColor-600 sm:text-sm sm:leading-6"
                       >
@@ -1104,7 +1110,7 @@ function Checkout() {
                       value={deliveryMethod}
                       aria-label={deliveryMethod.title}
                       aria-description={`${deliveryMethod.turnaround} for ${deliveryMethod.price}`}
-                      className="group relative flex cursor-pointer rounded-lg border border-gray-300 bg-white p-4 shadow-sm focus:outline-none data-[checked]:border-transparent data-[focus]:ring-2 data-[focus]:ring-indigo-500"
+                      className="group relative flex cursor-pointer rounded-lg border border-gray-300 bg-white p-4 shadow-sm focus:outline-none data-[checked]:border-transparent data-[focus]:ring-2 data-[focus]:ring-themeColor-500"
                     >
                       <span className="flex flex-1">
                         <span className="flex flex-col">
@@ -1114,18 +1120,20 @@ function Checkout() {
                           <span className="mt-1 flex items-center text-sm text-gray-500">
                             {deliveryMethod.turnaround}
                           </span>
-                          <span className="mt-6 text-sm font-medium text-gray-900">
-                            ${deliveryMethod.price}
-                          </span>
+                          {deliveryMethod?.price != undefined ? (
+                            <span className="mt-6 text-sm font-medium text-gray-900">
+                              ${deliveryMethod.price}
+                            </span>
+                          ) : null}
                         </span>
                       </span>
                       <CheckCircleIcon
                         aria-hidden="true"
-                        className="h-5 w-5 text-indigo-600 [.group:not([data-checked])_&]:hidden"
+                        className="h-5 w-5 text-themeColor-600 [.group:not([data-checked])_&]:hidden"
                       />
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent group-data-[focus]:border group-data-[checked]:border-indigo-500"
+                        className="pointer-events-none absolute -inset-px rounded-lg border-2 border-transparent group-data-[focus]:border group-data-[checked]:border-themeColor-500"
                       />
                     </Radio>
                   ))}
@@ -1301,9 +1309,9 @@ function Checkout() {
                       </p>
                       <ul className="mt-2">
                         <li>
-                          1. Shipping or Billing address contains missing data.
+                          1. Shipping or Billing address contains incorrect or
+                          missing data.
                         </li>
-                        <li>2. In-correct Shipping option selected.</li>
                       </ul>
                     </div>
                   </div>
