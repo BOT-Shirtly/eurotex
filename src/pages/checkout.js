@@ -75,6 +75,7 @@ function Checkout() {
     postal: "",
     country: "",
     freightOption: "Dock-level",
+    additionalInfo: "",
   });
   const [shippingAddress, setShippingAddress] = useState({
     name: "",
@@ -85,6 +86,7 @@ function Checkout() {
     postal: "",
     country: "",
     freightOption: "Dock-level",
+    additionalInfo: "",
   });
   const handleBillingInputChange = (event) => {
     const { name, value } = event.target;
@@ -1239,7 +1241,7 @@ function Checkout() {
                     htmlFor="state"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Frieght Options
+                    Freight Options
                   </label>
                   <select
                     id="freightOption"
@@ -1253,6 +1255,24 @@ function Checkout() {
                       Ground-level delivery
                     </option>
                   </select>
+                </div>
+                <div className="col-span-full mt-5">
+                  <label
+                    htmlFor="address"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Additional Information
+                  </label>
+                  <div className="mt-1">
+                    <textarea
+                      id="additionalInfo"
+                      name="additionalInfo"
+                      onChange={handleShippingInputChange}
+                      value={shippingAddress.additionalInfo}
+                      type="text"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-themeColor-500 focus:ring-themeColor-500 sm:text-sm"
+                    ></textarea>
+                  </div>
                 </div>
               </>
             ) : null}
