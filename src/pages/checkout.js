@@ -55,8 +55,9 @@ function Checkout() {
     },
     {
       id: 2,
-      title: "Store Pick-up",
+      title: "Store pickup",
       turnaround: "2–5 business days",
+      price: 0,
     },
   ]);
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
@@ -122,7 +123,7 @@ function Checkout() {
   }, [billingAddress]);
 
   useEffect(() => {
-    if (selectedDeliveryMethod?.title == "Store Pick-up") {
+    if (selectedDeliveryMethod?.title == "Store pickup") {
       setShippingCost(0.0);
     } else {
       getShippingRate();
@@ -602,7 +603,7 @@ function Checkout() {
                 <dd className="text-gray-900">{totalWeight}</dd>
               </div>
               {/* {totalWeight > 149 &&
-              selectedDeliveryMethod?.title != "Store Pick-up" ? (
+              selectedDeliveryMethod?.title != "Store pickup" ? (
                 <div className="rounded-md bg-red-50 p-4 mt-4 text-left relative border">
                   <div className="flex">
                     <div className="flex-shrink-0">
@@ -625,7 +626,7 @@ function Checkout() {
                         </p>
                         <ul className="mt-2">
                           <li>"Frieght Shipping Option"</li>
-                          <li>"Store Pick-up"</li>
+                          <li>"Store pickup"</li>
                         </ul>
                         <p className="mt-2">
                           Freight shipping for bulk orders is invoiced
@@ -644,7 +645,7 @@ function Checkout() {
               </div>
               {shippingCost === 0 &&
               !loading &&
-              selectedDeliveryMethod?.title != "Store Pick-up" &&
+              selectedDeliveryMethod?.title != "Store pickup" &&
               selectedDeliveryMethod?.title != "Freight shipping" ? (
                 <div className="rounded-md bg-yellow-50 p-4 mt-4 text-left relative border">
                   <button
@@ -715,12 +716,12 @@ function Checkout() {
                   <dd className="text-gray-900">${shippingCost}</dd>
                 </div>
               ) : null}
-              {selectedDeliveryMethod?.title == "Store Pick-up" ? (
+              {selectedDeliveryMethod?.title == "Store pickup" ? (
                 <div className="flex justify-between">
                   <dt>
                     Shipping&nbsp;
                     <span className="text-gray-500 text-xs">
-                      (Store Pick-up)
+                      (Store pickup)
                     </span>
                   </dt>
                   <dd className="text-gray-900">${shippingCost}</dd>
@@ -1153,7 +1154,7 @@ function Checkout() {
               </fieldset>
             </div>
 
-            {selectedDeliveryMethod?.title == "Store Pick-up" ? (
+            {selectedDeliveryMethod?.title == "Store pickup" ? (
               <>
                 <div className="mt-5 relative">
                   <div
@@ -1164,7 +1165,7 @@ function Checkout() {
                   </div>
                   <div className="relative flex justify-center">
                     <span className="bg-white pr-3 text-base font-semibold leading-6 text-gray-900">
-                      Pick-up Address
+                      Pickup Address
                     </span>
                   </div>
                 </div>
@@ -1178,20 +1179,20 @@ function Checkout() {
                     </div>
                     <div className="ml-3">
                       <h3 className="text-sm font-medium text-yellow-800">
-                        Pick-up Address
+                        Pickup Address
                       </h3>
                       <div className="mt-2 text-sm text-yellow-700">
                         <p>
                           122 Middleton Street
                           <br />
-                          Brantfor N3S7V7 ON
+                          Brantford, ON
                           <br />
-                          Canada
+                          N3S7V7
                         </p>
                       </div>
                       <h3 className="text-sm font-medium text-yellow-800 mt-2">
-                        Note: You will receive an email confirmation once order
-                        is ready for pickup.
+                        Note: You will receive an email confirmation once your
+                        order is ready for pickup.
                       </h3>
                     </div>
                   </div>
