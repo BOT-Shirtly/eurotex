@@ -592,7 +592,7 @@ function Checkout() {
                 <dt>Weight (pounds)</dt>
                 <dd className="text-gray-900">{totalWeight}</dd>
               </div>
-              {/* {totalWeight > 149 &&
+              {totalWeight > 149 &&
               selectedDeliveryMethod?.title != "Store Pick-up" ? (
                 <div className="rounded-md bg-red-50 p-4 mt-4 text-left relative border">
                   <div className="flex">
@@ -604,13 +604,12 @@ function Checkout() {
                     </div>
                     <div className="ml-3">
                       <h3 className="text-sm font-medium text-red-800">
-                        Exceed Weight Limit
+                        Weight Limit
                       </h3>
                       <div className="mt-2 text-sm text-red-700">
                         <p>
-                          Due to shipping restrictions, orders exceeding a total
-                          weight of 149 pounds will require special
-                          arrangements.
+                          Orders exceeding a total weight of 149 pounds will
+                          require special arrangements.
                         </p>
                         <p className="mt-2">
                           Please select one of the following options:
@@ -628,7 +627,7 @@ function Checkout() {
                     </div>
                   </div>
                 </div>
-              ) : null} */}
+              ) : null}
 
               <div className="flex justify-between">
                 <dt>Subtotal</dt>
