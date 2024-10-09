@@ -1211,7 +1211,7 @@ function Checkout() {
                   </div>
                   <div className="relative flex justify-center">
                     <span className="bg-white pr-3 text-base font-semibold leading-6 text-gray-900">
-                      Frieght Options
+                      Freight Options
                     </span>
                   </div>
                 </div>
