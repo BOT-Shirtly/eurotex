@@ -74,6 +74,7 @@ function Checkout() {
     state: "",
     postal: "",
     country: "",
+    freightOption: "Dock-level",
   });
   const [shippingAddress, setShippingAddress] = useState({
     name: "",
@@ -83,6 +84,7 @@ function Checkout() {
     state: "",
     postal: "",
     country: "",
+    freightOption: "Dock-level",
   });
   const handleBillingInputChange = (event) => {
     const { name, value } = event.target;
@@ -286,7 +288,12 @@ function Checkout() {
       });
   };
   const getShippingRate = () => {
-    if (shippingAddress?.state && shippingAddress.country && totalWeight) {
+    if (
+      shippingAddress?.postal &&
+      shippingAddress?.state &&
+      shippingAddress.country &&
+      totalWeight
+    ) {
       setIsVisible(true);
       setLoading(true);
       var userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
@@ -1186,6 +1193,44 @@ function Checkout() {
                       </h3>
                     </div>
                   </div>
+                </div>
+              </>
+            ) : null}
+
+            {selectedDeliveryMethod?.title == "Freight shipping" ? (
+              <>
+                <div className="mt-5 relative">
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 flex items-center"
+                  >
+                    <div className="w-full border-t border-gray-300" />
+                  </div>
+                  <div className="relative flex justify-center">
+                    <span className="bg-white pr-3 text-base font-semibold leading-6 text-gray-900">
+                      Frieght Options
+                    </span>
+                  </div>
+                </div>
+                <div className="col-span-full sm:col-span-4">
+                  <label
+                    htmlFor="state"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Frieght Options
+                  </label>
+                  <select
+                    id="freightOption"
+                    name="freightOption"
+                    value={shippingAddress.freightOption}
+                    onChange={handleShippingInputChange}
+                    className="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-themeColor-600 sm:text-sm sm:leading-6"
+                  >
+                    <option value={"Dock-level"}>Dock-level delivery</option>
+                    <option value={"Ground-level"}>
+                      Ground-level delivery
+                    </option>
+                  </select>
                 </div>
               </>
             ) : null}
