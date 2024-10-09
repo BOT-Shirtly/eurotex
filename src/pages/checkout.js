@@ -286,48 +286,51 @@ function Checkout() {
       });
   };
   const getShippingRate = () => {
-    setLoading(true);
-    var userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
-    axios
-      .get(
-        `${process.env.REACT_APP_BASE_URL}/eurotex/getRates?shipToState=${
-          shippingAddress?.state?.split("-")[0]
-        }&shipToCountry=${shippingAddress.country}&postalCode=${
-          shippingAddress.postal
-        }&weightPounds=${Number(totalWeight).toString()}`,
-        {
-          headers: {
-            authorization: userData?.authToken, // Replace with your actual token
-          },
-        }
-      )
-      .then((response) => {
-        if (response.data.success == undefined) {
-          setLoading(false);
-
-          console.log(response.data);
-
-          const updatedOptions = [...deliveryMethods];
-          for (var i = 0; i < response?.data?.length; i++) {
-            var serviceName = response?.data[i]?.serviceName;
-            for (var j = 0; j < updatedOptions?.length; j++) {
-              if (updatedOptions[j]?.title == serviceName) {
-                updatedOptions[j].price = response?.data[i]?.total;
+    if (shippingAddress?.state && shippingAddress.country && totalWeight) {
+      setIsVisible(true);
+      setLoading(true);
+      var userData = JSON.parse(localStorage.getItem("__EurotexUser__"));
+      axios
+        .get(
+          `${process.env.REACT_APP_BASE_URL}/eurotex/getRates?shipToState=${
+            shippingAddress?.state?.split("-")[0]
+          }&shipToCountry=${shippingAddress.country}&postalCode=${
+            shippingAddress.postal
+          }&weightPounds=${Number(totalWeight).toString()}`,
+          {
+            headers: {
+              authorization: userData?.authToken, // Replace with your actual token
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data.success == undefined) {
+            setLoading(false);
+            setIsVisible(false);
+            const updatedOptions = [...deliveryMethods];
+            for (var i = 0; i < response?.data?.length; i++) {
+              var serviceName = response?.data[i]?.serviceName;
+              for (var j = 0; j < updatedOptions?.length; j++) {
+                if (updatedOptions[j]?.title == serviceName) {
+                  updatedOptions[j].price = response?.data[i]?.total;
+                }
               }
             }
+            setDeliveryMethods(updatedOptions);
+            setShippingCost(selectedDeliveryMethod?.price);
+            setShippingService(selectedDeliveryMethod?.title);
+          } else {
+            setLoading(false);
+            setIsVisible(false);
+            localStorage.removeItem("__EurotexUser__");
+            window.location.replace("/");
           }
-          setDeliveryMethods(updatedOptions);
-          setShippingCost(selectedDeliveryMethod?.price);
-          setShippingService(selectedDeliveryMethod?.title);
-        } else {
+        })
+        .catch((error) => {
           setLoading(false);
-          localStorage.removeItem("__EurotexUser__");
-          window.location.replace("/");
-        }
-      })
-      .catch((error) => {
-        setLoading(false);
-      });
+          setIsVisible(false);
+        });
+    }
   };
   return (
     <>
@@ -589,7 +592,7 @@ function Checkout() {
                 <dt>Weight (pounds)</dt>
                 <dd className="text-gray-900">{totalWeight}</dd>
               </div>
-              {totalWeight > 149 &&
+              {/* {totalWeight > 149 &&
               selectedDeliveryMethod?.title != "Store Pick-up" ? (
                 <div className="rounded-md bg-red-50 p-4 mt-4 text-left relative border">
                   <div className="flex">
@@ -625,15 +628,16 @@ function Checkout() {
                     </div>
                   </div>
                 </div>
-              ) : null}
+              ) : null} */}
 
               <div className="flex justify-between">
                 <dt>Subtotal</dt>
                 <dd className="text-gray-900">${subTotal}</dd>
               </div>
-              {totalWeight > 149 ? null : shippingCost === 0 &&
-                !loading &&
-                selectedDeliveryMethod?.title != "Store Pick-up" ? (
+              {shippingCost === 0 &&
+              !loading &&
+              selectedDeliveryMethod?.title != "Store Pick-up" &&
+              selectedDeliveryMethod?.title != "Freight shipping" ? (
                 <div className="rounded-md bg-yellow-50 p-4 mt-4 text-left relative border">
                   <button
                     onClick={getShippingRate}
@@ -1261,9 +1265,7 @@ function Checkout() {
               shippingAddress.country &&
               !loading &&
               orderTotal > 0 &&
-              totalWeight > 149 &&
-              (selectedDeliveryMethod?.title == "Store Pick-up" ||
-                selectedDeliveryMethod?.title == "Freight shipping") ? (
+              totalWeight > 149 ? (
               <Elements stripe={stripePromise} className="mt-5">
                 <PaymentForm
                   amount={orderTotal}
