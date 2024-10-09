@@ -599,7 +599,7 @@ function Checkout() {
                 <dt>Weight (pounds)</dt>
                 <dd className="text-gray-900">{totalWeight}</dd>
               </div>
-              {totalWeight > 149 &&
+              {/* {totalWeight > 149 &&
               selectedDeliveryMethod?.title != "Store Pick-up" ? (
                 <div className="rounded-md bg-red-50 p-4 mt-4 text-left relative border">
                   <div className="flex">
@@ -634,7 +634,7 @@ function Checkout() {
                     </div>
                   </div>
                 </div>
-              ) : null}
+              ) : null} */}
 
               <div className="flex justify-between">
                 <dt>Subtotal</dt>
@@ -1212,7 +1212,29 @@ function Checkout() {
                     </span>
                   </div>
                 </div>
-                <div className="col-span-full sm:col-span-4">
+                <div className="rounded-md bg-yellow-50 p-4 mt-4 text-left relative border">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <ExclamationTriangleIcon
+                        aria-hidden="true"
+                        className="h-5 w-5 text-yellow-400"
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-yellow-800">
+                        Freight Shipping
+                      </h3>
+                      <div className="mt-2 text-sm text-yellow-700">
+                        <p>
+                          Freight shipping for bulk orders is invoiced
+                          separately after purchase. Prepayment is required
+                          before shipping can be arranged.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-span-full sm:col-span-4 mt-5">
                   <label
                     htmlFor="state"
                     className="block text-sm font-medium leading-6 text-gray-900"
