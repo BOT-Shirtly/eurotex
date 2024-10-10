@@ -76,6 +76,7 @@ function Checkout() {
     postal: "",
     country: "",
     freightOption: "Dock-level",
+    contact: "",
     additionalInfo: "",
   });
   const [shippingAddress, setShippingAddress] = useState({
@@ -87,6 +88,7 @@ function Checkout() {
     postal: "",
     country: "",
     freightOption: "Dock-level",
+    contact: "",
     additionalInfo: "",
   });
   const handleBillingInputChange = (event) => {
@@ -1262,6 +1264,24 @@ function Checkout() {
                     htmlFor="address"
                     className="block text-sm font-medium text-gray-700"
                   >
+                    Phone Contact
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      id="contact"
+                      name="contact"
+                      value={shippingAddress.contact}
+                      onChange={handleShippingInputChange}
+                      type="number"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-themeColor-500 focus:ring-themeColor-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+                <div className="col-span-full mt-5">
+                  <label
+                    htmlFor="address"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Additional Information
                   </label>
                   <div className="mt-1">
@@ -1353,32 +1373,91 @@ function Checkout() {
               !loading &&
               orderTotal > 0 &&
               totalWeight > 149 ? (
-              <Elements stripe={stripePromise} className="mt-5">
-                <PaymentForm
-                  amount={orderTotal}
-                  email={billingAddress.email}
-                  name={billingAddress.name}
-                  shippingAddress={shippingAddress}
-                  billingAddress={billingAddress}
-                  metadata={{
-                    orderNumber,
-                    orderedItems: products,
-                    billingAddress,
-                    shippingAddress,
-                    sameBillingShipping,
-                    shippingService,
-                    selectedDeliveryMethod,
-                    paymentDetails: {
-                      subTotal: Number(subTotal),
-                      taxEstimate: Number(taxEstimate),
-                      orderTotal: Number(orderTotal),
-                      totalWeight: Number(totalWeight),
-                      shippingCost: Number(shippingCost),
-                    },
-                  }}
-                  orderNumber={orderNumber}
-                />
-              </Elements>
+              selectedDeliveryMethod?.title == "Freight shipping" ? (
+                shippingAddress?.contact ? (
+                  <Elements stripe={stripePromise} className="mt-5">
+                    <PaymentForm
+                      amount={orderTotal}
+                      email={billingAddress.email}
+                      name={billingAddress.name}
+                      shippingAddress={shippingAddress}
+                      billingAddress={billingAddress}
+                      metadata={{
+                        orderNumber,
+                        orderedItems: products,
+                        billingAddress,
+                        shippingAddress,
+                        sameBillingShipping,
+                        shippingService,
+                        selectedDeliveryMethod,
+                        paymentDetails: {
+                          subTotal: Number(subTotal),
+                          taxEstimate: Number(taxEstimate),
+                          orderTotal: Number(orderTotal),
+                          totalWeight: Number(totalWeight),
+                          shippingCost: Number(shippingCost),
+                        },
+                      }}
+                      orderNumber={orderNumber}
+                    />
+                  </Elements>
+                ) : (
+                  <div className="rounded-md bg-red-50 p-4 mt-4 text-left relative border">
+                    <div className="flex">
+                      <div className="flex-shrink-0">
+                        <ExclamationTriangleIcon
+                          aria-hidden="true"
+                          className="h-5 w-5 text-red-400"
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <h3 className="text-sm font-medium text-red-800">
+                          Incorrect/Missing Information
+                        </h3>
+                        <div className="mt-2 text-sm text-red-700">
+                          <p className="mt-2">
+                            One of the following details are missing from the
+                            order:
+                          </p>
+                          <ul className="mt-2">
+                            <li>
+                              1. Required phone contact for Freight Shipping
+                              Option
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              ) : (
+                <Elements stripe={stripePromise} className="mt-5">
+                  <PaymentForm
+                    amount={orderTotal}
+                    email={billingAddress.email}
+                    name={billingAddress.name}
+                    shippingAddress={shippingAddress}
+                    billingAddress={billingAddress}
+                    metadata={{
+                      orderNumber,
+                      orderedItems: products,
+                      billingAddress,
+                      shippingAddress,
+                      sameBillingShipping,
+                      shippingService,
+                      selectedDeliveryMethod,
+                      paymentDetails: {
+                        subTotal: Number(subTotal),
+                        taxEstimate: Number(taxEstimate),
+                        orderTotal: Number(orderTotal),
+                        totalWeight: Number(totalWeight),
+                        shippingCost: Number(shippingCost),
+                      },
+                    }}
+                    orderNumber={orderNumber}
+                  />
+                </Elements>
+              )
             ) : (
               <div className="rounded-md bg-red-50 p-4 mt-4 text-left relative border">
                 <div className="flex">
@@ -1390,7 +1469,7 @@ function Checkout() {
                   </div>
                   <div className="ml-3">
                     <h3 className="text-sm font-medium text-red-800">
-                      Incorrect Information
+                      Incorrect/Missing Information
                     </h3>
                     <div className="mt-2 text-sm text-red-700">
                       <p className="mt-2">
