@@ -31,6 +31,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
 import Loading from "./loading";
 import { ToastContainer, toast } from "react-toastify";
+import GoogleTranslate from "./GoogleTranslate";
 
 const currencies = ["CAD"];
 
@@ -248,7 +249,7 @@ function Header() {
                     </div>
                   </div>
                 </form>
-
+                <GoogleTranslate />
                 <div className="flex items-center space-x-6">
                   {userDetails?.authToken && userDetails?.role === "Admin" && (
                     <>
