@@ -333,18 +333,18 @@ const Contact = () => {
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
               <div className="rounded-2xl bg-gray-50 p-10">
-                <h3 className="text-base font-semibold leading-7 text-gray-900">
-                  Ontario Office
-                </h3>
                 <address className="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
                   <p>122 Middleton Street</p>
                   <p>Brantford, ON N3S7V7</p>
                 </address>
               </div>
               <div className="rounded-2xl bg-gray-50 p-10">
-                <h3 className="text-base font-semibold leading-7 text-gray-900">
-                  Québec Office
-                </h3>
+                <address className="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
+                  <p>8742 Buffalo Ave,</p>
+                  <p>Niagara Falls, NY 14304</p>
+                </address>
+              </div>
+              <div className="rounded-2xl bg-gray-50 p-10">
                 <address className="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
                   <p>4240 Rue Seré</p>
                   <p>Montréal QC H4T 1A6</p>
