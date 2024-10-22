@@ -15,7 +15,7 @@ import {
   Cog6ToothIcon,
   DocumentDuplicateIcon,
   FolderIcon,
-  HomeIcon,
+  GlobeAltIcon,
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -25,27 +25,8 @@ import AdminProducts from "./admin-products";
 import AdminProduct from "./admin-product";
 import AdminProductNew from "./admin-product-new";
 import AdminOrder from "./admin-order";
-
-const plans = [
-  {
-    id: 1,
-    name: "Hobby",
-    memory: "4 GB RAM",
-    cpu: "4 CPUs",
-    storage: "128 GB SSD disk",
-    price: "$40",
-    isCurrent: false,
-  },
-  {
-    id: 2,
-    name: "Startup",
-    memory: "8 GB RAM",
-    cpu: "6 CPUs",
-    storage: "256 GB SSD disk",
-    price: "$80",
-    isCurrent: true,
-  },
-];
+import AdminWebPages from "./admin-webPages";
+import AdminWebPage from "./admin-webPage";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -74,6 +55,13 @@ function Admin() {
       icon: FolderIcon,
       current:
         window.location.pathname.indexOf("/admin/products") >= 0 ? true : false,
+    },
+    {
+      name: "Web Pages",
+      href: "/admin/webPages/HomePage",
+      icon: GlobeAltIcon,
+      current:
+        window.location.pathname.indexOf("/admin/webPages") >= 0 ? true : false,
     },
   ]);
 
@@ -204,6 +192,8 @@ function Admin() {
               <Route path="products" element={<AdminProducts />} />
               <Route path="products/:productId" element={<AdminProduct />} />
               <Route path="products/new" element={<AdminProductNew />} />
+              <Route path="webPages" element={<AdminWebPages />} />
+              <Route path="webPages/:webpage" element={<AdminWebPage />} />
             </Routes>
           </main>
         </div>
