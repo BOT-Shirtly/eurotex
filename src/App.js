@@ -77,7 +77,7 @@ function App() {
       <Router>
         <div>
           <Header />
-          <main className="pt-24">
+          <main className="pt-32">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
