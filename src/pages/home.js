@@ -170,19 +170,6 @@ const faqs = [
   },
 ];
 
-const slides = [
-  {
-    url: "https://images.shirtly.com/image/upload/v1727709069/Eurotex/Slides/HEADER_LOGO_iukhjq.webp",
-    alt: "Eurotex North America Inc.",
-    href: "/contact",
-  },
-  {
-    url: "https://images.shirtly.com/image/upload/v1727709069/Eurotex/Slides/HEADER_LOGO_iukhjq.webp",
-    alt: "Eurotex North America Inc.",
-    href: "/contact",
-  },
-];
-
 const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState([]);
