@@ -5,7 +5,7 @@ import axios from "axios";
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [incentives, setIncentives] = useState([]);
-  const [editorValue, setEditorValue] = useState("");
+  const [htmlContent, setHtmlContent] = useState("");
   useEffect(() => {
     setIsVisible(true);
     axios
@@ -15,7 +15,7 @@ const About = () => {
       .then((response) => {
         if (response.data.success == undefined) {
           setIsVisible(false);
-          setEditorValue(response.data[0].description);
+          setHtmlContent(response.data[0].description);
           setIncentives(response.data[0].incentives);
         } else {
           setIsVisible(false);
@@ -32,7 +32,11 @@ const About = () => {
         <div className="mx-auto max-w-7xl py-20 sm:px-2 sm:py-30 lg:px-4">
           <div className="mx-auto max-w-2xl px-4 lg:max-w-none">
             <div>
-              <div dangerouslySetInnerHTML={{ __html: editorValue }} />
+              <iframe
+                title="HTML Preview"
+                style={{ width: "100%", height: "30vh", border: "0px" }}
+                srcDoc={htmlContent} // Dynamically render the HTML inside the iframe
+              ></iframe>
 
               {/* <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-gray-100">
               

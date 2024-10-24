@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "components/loading";
 import axios from "axios";
@@ -13,6 +13,27 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [locations, setLocations] = useState([]);
+  const [editorValue, setEditorValue] = useState("");
+  useEffect(() => {
+    setIsVisible(true);
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/eurotex/webpages`, {
+        webpage: "Contact",
+      })
+      .then((response) => {
+        if (response.data.success == undefined) {
+          setIsVisible(false);
+          setLocations(response?.data[0]?.locations);
+          setEditorValue(response?.data[0]?.description);
+        } else {
+          setIsVisible(false);
+        }
+      })
+      .catch((error) => {
+        setIsVisible(false);
+      });
+  }, []);
   const handleChange = (e) => {
     // Update state with input changes
     setFormData({
@@ -290,20 +311,10 @@ const Contact = () => {
                   />
                   <figure className="mt-10">
                     <blockquote className="text-lg font-semibold leading-8 text-gray-900">
-                      <p className="text-md">
-                        Specializing in the sale of DTF (Direct-to-Film) inks,
-                        printing supplies, and equipment, we cater to both
-                        businesses offering DTF printing services and
-                        individuals across Canada.
-                        <br></br>
-                        Our commitment to excellence is reflected not only in
-                        our products but also in our customer service. We
-                        provide comprehensive Canadian technical support,
-                        offering both on-site and online assistance, as well as
-                        personalized one-on-one technical support. At Eurotex
-                        Canada, we are more than just a supplier—we are a
-                        partner dedicated to helping you grow your business.
-                      </p>
+                      <div
+                        dangerouslySetInnerHTML={{ __html: editorValue }}
+                        className="space-y-6 text-base text-md text-gray-300"
+                      />
                     </blockquote>
                     {/* <figcaption className="mt-10 flex gap-x-6">
                     <img
@@ -332,24 +343,13 @@ const Contact = () => {
               </h2>
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
-              <div className="rounded-2xl bg-gray-50 p-10">
-                <address className="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
-                  <p>122 Middleton Street</p>
-                  <p>Brantford, ON N3S7V7</p>
-                </address>
-              </div>
-              <div className="rounded-2xl bg-gray-50 p-10">
-                <address className="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
-                  <p>8742 Buffalo Ave,</p>
-                  <p>Niagara Falls, NY 14304</p>
-                </address>
-              </div>
-              <div className="rounded-2xl bg-gray-50 p-10">
-                <address className="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
-                  <p>4240 Rue Seré</p>
-                  <p>Montréal QC H4T 1A6</p>
-                </address>
-              </div>
+              {locations?.map((item, i) => (
+                <div className="rounded-2xl bg-gray-50 p-10">
+                  <address className="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
+                    <p>{item?.address}</p>
+                  </address>
+                </div>
+              ))}
               {/* <div className="rounded-2xl bg-gray-50 p-10">
               <h3 className="text-base font-semibold leading-7 text-gray-900">
                 New York
