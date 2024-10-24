@@ -38,6 +38,13 @@ const CloudinaryUploadWidget = (props) => {
             });
             console.log(updatedVariants);
             props?.setDetails(updatedVariants);
+          } else if (props?.slides) {
+            const updatedData = props?.slides.map((item, i) =>
+              i === props?.index
+                ? { ...item, [props?.field]: result?.info?.secure_url }
+                : item
+            );
+            props?.setSlides(updatedData); // Update the state with the modified array
           }
         }
       }
@@ -48,9 +55,9 @@ const CloudinaryUploadWidget = (props) => {
   return (
     <button
       onClick={handleOpenWidget}
-      className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+      className="rounded-md w-full bg-themeColor-600 px-2.5 py-1.5 text-white text-sm font-semibold"
     >
-      Upload
+      Upload File&nbsp;<span aria-hidden="true">&rarr;</span>
     </button>
   );
 };

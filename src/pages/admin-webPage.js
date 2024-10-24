@@ -1687,6 +1687,16 @@ function Product() {
                           </div>
                         </div>
                       </div>
+                      <div className="sm:col-span-6 flex items-center gap-x-3">
+                        <CloudinaryUploadWidget
+                          slides={slides}
+                          setSlides={setSlides}
+                          index={i}
+                          field={"imageSrc"}
+                          handleSlidesChange={handleSlidesChange}
+                          folder={`KingJetPrinters/Slides`}
+                        />
+                      </div>
                     </div>
                   ))}
                   <div className="text-center border-dashed border-2 p-3 rounded-lg">
