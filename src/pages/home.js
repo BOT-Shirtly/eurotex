@@ -187,6 +187,28 @@ const Home = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
+  const [slides, setSlides] = useState([]);
+  useEffect(() => {
+    setIsVisible(true);
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/eurotex/webpages`, {
+        webpage: "HomePage",
+      })
+      .then((response) => {
+        if (response.data.success == undefined) {
+          setIsVisible(false);
+          if (response.data[0].slides.length == 1) {
+            response?.data[0]?.slides.push(response?.data[0]?.slides[0]);
+          }
+          setSlides(response?.data[0]?.slides);
+        } else {
+          setIsVisible(false);
+        }
+      })
+      .catch((error) => {
+        setIsVisible(false);
+      });
+  }, []);
 
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
@@ -273,10 +295,9 @@ const Home = () => {
                   {/* Decorative image grid */}
                   <div aria-hidden="true" className="pointer-events-none">
                     <div className="w-full overflow-hidden sm:opacity-0 lg:opacity-100">
-                      <a href={slides[currentIndex].href}>
+                      <a href={slides[currentIndex]?.href}>
                         <img
-                          src={slides[currentIndex].url}
-                          alt={slides[currentIndex].alt}
+                          src={slides[currentIndex]?.imageSrc}
                           className="h-[50vh] w-full object-contain object-center"
                         />
                       </a>
